@@ -10,7 +10,7 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
-      input: { admin: "./react-src/index.jsx" },
+      input: { 'partial-admin': "./react-src/index.jsx" },
       output: {
         manualChunks: (id) => { //extract the react js related dependencies on a seperate file
           if (id.includes("node_modules") ) {
@@ -20,7 +20,7 @@ export default defineConfig({
           }
         },
         entryFileNames: (chunkInfo) => {
-          if (chunkInfo.name == "admin") {
+          if (chunkInfo.name == "partial-admin") {
             return `admin/${chunkInfo.name}.js`;
           }
         },

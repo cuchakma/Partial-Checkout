@@ -4,8 +4,8 @@
     "name": "library/react-source-compiler.js"
   },
   "react-src/index.jsx": {
-    "file": "admin/admin.js",
-    "name": "admin",
+    "file": "admin/partial-admin.js",
+    "name": "partial-admin",
     "src": "react-src/index.jsx",
     "isEntry": true,
     "imports": [
