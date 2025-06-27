@@ -21,7 +21,8 @@ class Assets extends Service implements AdminInterface {
     ];
 
     public $_assets_source_paths = [
-        'react-src/index.jsx'
+        'partial-checkout-react-compiler'   => '_react-source-compiler.js-BhTzXy3Z.js',
+        'partial-checkout-react-app-source' => 'react-src/index.jsx'
     ];
 
     public function __construct( $assets_path ) {
@@ -31,9 +32,22 @@ class Assets extends Service implements AdminInterface {
 
     public function _register_hooks(): void {
         add_action( 'admin_enqueue_scripts', [$this, '_admin_services'] );
+        add_filter( 'script_loader_tag', [$this, '_add_module_to_script'], 99999999, 3 );
     }
 
     public function _admin_services(): void {
-        wp_enqueue_script( 'partial-checkout', $this->load()->resolve( $this->_assets_source_paths[0] ), $this->_react_handles, wp_rand(), true );
+        foreach ( $this->_assets_source_paths as $handle => $source_path ) {
+            if ( wp_script_is( 'react', 'registered' ) && $handle == 'partial-checkout-react-compiler' ) { // if react js and its utilities are loaded in wordpress by default, then do not load the react, react-dom source compiler files from the plugin
+                continue;
+            }
+            wp_enqueue_script( $handle, $this->load()->resolve( $source_path ), $this->_react_handles, wp_rand(), true );
+        }
+    }
+
+    public function _add_module_to_script( $tag, $handle, $src ) {
+        if ( $handle == 'partial-checkout-react-compiler' || $handle == 'partial-checkout-react-app-source' ) {
+            $tag = '<script type=module src="' . esc_url( $src ) . '" id="' . $handle . '-js"></script>';
+        }
+        return $tag;
     }
 }

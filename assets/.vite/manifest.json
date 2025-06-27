@@ -1,8 +1,15 @@
 {
+  "_react-source-compiler.js-BhTzXy3Z.js": {
+    "file": "library/react-source-compiler.js-BhTzXy3Z.js",
+    "name": "library/react-source-compiler.js"
+  },
   "react-src/index.jsx": {
-    "file": "admin/LGP9sjcM.js",
+    "file": "admin/admin.js",
     "name": "admin",
     "src": "react-src/index.jsx",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_react-source-compiler.js-BhTzXy3Z.js"
+    ]
   }
 }

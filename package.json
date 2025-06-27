@@ -13,12 +13,14 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.12.1",
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
   "devDependencies": {
     "vite": "^7.0.0"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^4.6.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@vitejs/plugin-react": "^4.6.0"
   }
 }

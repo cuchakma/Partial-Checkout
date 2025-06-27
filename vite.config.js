@@ -12,9 +12,16 @@ export default defineConfig({
     rollupOptions: {
       input: { admin: "./react-src/index.jsx" },
       output: {
+        manualChunks: (id) => { //extract the react js related dependencies on a seperate file
+          if (id.includes("node_modules") ) {
+            if (id.includes("react") || id.includes("react-dom") || id.includes('jsx-runtime')) {
+              return "library/react-source-compiler.js";
+            }
+          }
+        },
         entryFileNames: (chunkInfo) => {
           if (chunkInfo.name == "admin") {
-            return "admin/[hash].js";
+            return `admin/${chunkInfo.name}.js`;
           }
         },
         assetFileNames: "[hash].[ext]",
