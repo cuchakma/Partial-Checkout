@@ -37,16 +37,24 @@ class Assets extends Service implements AdminInterface {
 
     public function _admin_services(): void {
         $this->_load(); // load the resolver
+
         foreach ( $this->_get_manifest_file() as $handle => $source_path ) {
-            if ( wp_script_is( 'react', 'registered' ) && $handle == 'react-source-compiler' ) { // if react js and its utilities are loaded in wordpress by default, then do not load the react, react-dom source compiler files from the plugin
+            if ( ( wp_script_is( 'react', 'registered' ) && $handle == 'react-source-compiler' ) || !preg_match('/(\.js)/', $this->_get_manifest_file()[$handle]) ) { // if react js and its utilities are loaded in wordpress by default, then do not load the react, react-dom source compiler files from the plugin. Also do not load, if its not a js file
                 continue;
             }
+
             wp_enqueue_script( $handle, $this->_resolve( $source_path ), $this->_react_handles, wp_rand(), true );
+
+            if ( $handle == 'partial-admin' ) {
+                wp_localize_script( $handle, 'partialCheckout', [
+                    'BASE_URL' => site_url()
+                ] );
+            }
         }
     }
 
     public function _add_module_to_script( $tag, $handle, $src ) {
-        if ( isset( $this->_get_manifest_file()[$handle] ) ) {
+        if ( isset( $this->_get_manifest_file()[$handle] ) && preg_match('/(\.js)/', $this->_get_manifest_file()[$handle]) ) {
             $tag = '<script type=module src="' . esc_url( $src ) . '" id="' . $handle . '-js"></script>';
         }
         return $tag;

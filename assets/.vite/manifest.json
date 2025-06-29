@@ -3,6 +3,10 @@
     "file": "library/react-source-compiler.js-BhTzXy3Z.js",
     "name": "library/react-source-compiler.js"
   },
+  "react-src/images/banner-772x250.png": {
+    "file": "images/banner-772x250.png",
+    "src": "react-src/images/banner-772x250.png"
+  },
   "react-src/index.jsx": {
     "file": "admin/partial-admin.js",
     "name": "partial-admin",
@@ -10,6 +14,9 @@
     "isEntry": true,
     "imports": [
       "_react-source-compiler.js-BhTzXy3Z.js"
+    ],
+    "assets": [
+      "images/banner-772x250.png"
     ]
   }
 }

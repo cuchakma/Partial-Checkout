@@ -1,2 +1,2 @@
-import{j as t,c as o}from"../library/react-source-compiler.js-BhTzXy3Z.js";const e=()=>t.jsx("h1",{children:"Hello Bro"}),r=document.getElementById("partial-checkout"),c=o.createRoot(r);c.render(t.jsx(e,{}));
+import{j as e,c as s}from"../library/react-source-compiler.js-BhTzXy3Z.js";const o="/images/banner-772x250.png";class n{static getImageUrl(r){return new URL(`wp-content/plugins/partial-checkout/assets${r}`,partialCheckout?.BASE_URL).href}}const a=()=>{let t=n.getImageUrl(o);return e.jsx("img",{src:t})},c=document.getElementById("partial-checkout"),l=s.createRoot(c);l.render(e.jsx(a,{}));
 //# sourceMappingURL=partial-admin.js.map
